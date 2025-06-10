@@ -66,6 +66,8 @@ Platforms like [Windmill](https://windmill.dev) allow you to quickly build inter
 
 ## API Usage
 
+> **Note:** See the [Critical Note for Version 2](#a-critical-note-for-version-2) below for important planned changes to the API.
+
 * **Endpoint:** `https://www.yoursite.com/index.php`
 * **Method:** `POST`
 * **Authentication Header:** `X-Joomla-Token: YOUR_JOOMLA_API_TOKEN`
@@ -160,3 +162,15 @@ Add the following configuration to your `claude_desktop_config.json` file:
 4. **Add JSON Body:**
 
    * Add the JSON payload for the task you want to perform.
+
+## A Critical Note for Version 2
+
+I was so eager to get this out that I did not think through the tasks as carefully as I should have. Why does managing the article state or moving it to trash exist as separate tasks from `update_article`?
+
+### Planned Changes for Version 2
+
+1. **Task Consolidation:**
+   * The `manage_article_state` and `move_article_to_trash` tasks will be consolidated into the `update_article` task. This will simplify the API and make it more intuitive.
+
+2. **New Features:**
+   * Additional tasks for managing categories and tags will be introduced, expanding the plugin's capabilities.
