@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue?style=for-the-badge)
 ![Version](https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge)
 
-MCP is a lightweight, powerful system plugin for Joomla that provides a **Model Context Protocol**—a simple, task-based API for managing content. It acts as a streamlined bridge between your Joomla website and the modern world of AI, workflow automation, and internal tooling.
+MCP is a lightweight, powerful system plugin for Joomla that provides a **Model Context Protocol**—a simple, task-based API for managing content. It acts as a streamlined bridge between your Joomla website and the modern world of AI, workflow automation, and internal tooling. Learn more at [Model Context Protocol](https://modelcontextprotocol.io/).
 
 ## The Problem
 
@@ -28,14 +28,14 @@ It authenticates using Joomla's native API Token system, ensuring that all opera
 
 This is where MCP truly shines. It transforms your Joomla CMS from a siloed platform into a dynamic, integrated component of your automated workflows and AI-driven content pipelines.
 
-#### **For Workflow Automation (Make.com, n8n, Zapier, etc.)**
+### **For Workflow Automation ([Make.com](https://www.make.com), [n8n](https://n8n.io), [Zapier](https://zapier.com), etc.)**
 
-Platforms like Make.com and n8n are built around connecting services through API calls. MCP provides the perfect endpoints for their generic "HTTP Request" modules.
+Platforms like [Make.com](https://www.make.com) and [n8n](https://n8n.io) are built around connecting services through API calls. MCP provides the perfect endpoints for their generic "HTTP Request" modules.
 
 > **Example Use Case:**
 > An RSS feed triggers a workflow in **n8n**. An AI node rewrites the content, and then an HTTP Request node uses the **Model Context Protocol** (`task=mcp.create_article`) to instantly publish the new article to your Joomla site.
 
-#### **For AI Agent Frameworks (crewAI, AutoGen, etc.)**
+### **For AI Agent Frameworks ([crewAI](https://crew.ai), [AutoGen](https://autogen.io), etc.)**
 
 AI agents need "tools" to interact with the real world. MCP's endpoints are the perfect building blocks for these tools, allowing agents to autonomously manage content.
 
@@ -45,9 +45,9 @@ AI agents need "tools" to interact with the real world. MCP's endpoints are the 
 > 2.  The `WriterAgent` composes the article.
 > 3.  The `PublisherAgent` is given a `publish_to_joomla` tool, which uses the **Model Context Protocol** to call the `mcp.create_article` endpoint. The AI crew completes the entire task without human intervention.
 
-#### **For Internal Tooling & Scripting (Windmill, Superblocks, etc.)**
+### **For Internal Tooling & Scripting ([Windmill](https://windmill.dev), [Superblocks](https://superblocks.com), etc.)**
 
-Platforms like Windmill allow you to quickly build internal admin panels and run scripts. MCP provides a clean abstraction layer for interacting with Joomla.
+Platforms like [Windmill](https://windmill.dev) allow you to quickly build internal admin panels and run scripts. MCP provides a clean abstraction layer for interacting with Joomla.
 
 > **Example Use Case:**
 > Your marketing team wants a simple dashboard in **Windmill** to quickly publish press releases. A developer creates a simple UI. The "Publish" button triggers a script that uses the **Model Context Protocol** to push the content live instantly.
