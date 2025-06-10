@@ -75,13 +75,13 @@ Platforms like Windmill allow you to quickly build internal admin panels and run
 
 | Task                         | Description                                            | Example JSON Body                                                                                             |
 | ---------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `mcp.get_article`           | Retrieves a single article by ID.                      | `{"article_id": 124}`                                                                                         |
 | `mcp.get_articles`           | Retrieves a list of all articles.                      | `null`                                                                                                        |
 | `mcp.get_categories`         | Retrieves a list of all content categories.            | `null`                                                                                                        |
 | `mcp.create_article`         | Creates a new article.                                 | `{"title": "My Title", "articletext": "<p>Content</p>", "catid": 2, "published": true}`                       |
 | `mcp.update_article`         | Updates an existing article.                           | `{"article_id": 124, "title": "Updated Title", "articletext": "<p>New content.</p>"}`                       |
 | `mcp.manage_article_state`   | Changes an article's state (1=Pub, 0=Unpub, 2=Archive) | `{"article_id": 125, "target_state": 0}`                                                                      |
 | `mcp.move_article_to_trash`  | Moves an article to the trash.                         | `{"article_id": 126}`                                                                                         |
-| `mcp.get_article`           | Retrieves a single article by ID.                      | `{"article_id": 124}`                                                                                         |
 
 ### Example: Full `curl` Request
 
