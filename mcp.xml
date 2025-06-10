@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>plg_system_mcp</name>
+    <author>Brian Mitchell</author>
+    <creationDate>June 2024</creationDate>
+    <copyright>Copyright (C) 2024. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>connect@intergen.org</authorEmail>
+    <authorUrl>https://intergen.org</authorUrl>
+    <version>1.0.0</version>
+    <description>
+        <![CDATA[
+        <p>This plugin provides an MCP (Management Control Program) to manage Joomla articles and categories via a secure API endpoint, using Joomla's built-in API Token for authentication.</p>
+        
+        <h3>Setup Instructions</h3>
+        <ol>
+            <li>Go to <b>System -> Manage -> Plugins</b> and ensure the plugin named "<b>Web Services - Authentication - Token</b>" is enabled.</li>
+            <li>Go to <b>Users -> Manage</b> and select a user who will have API access.</li>
+            <li>In the user's profile, click the "<b>Joomla API Token</b>" tab.</li>
+            <li>Click "<b>Create a New Token</b>" to generate an API key for this user. The user must have permissions to create, edit, or manage the content you wish to interact with.</li>
+            <li>Use this generated token in the <code>X-Joomla-Token</code> header of your requests.</li>
+        </ol>
+
+        <h3>Usage Examples (cURL)</h3>
+        <p>Replace <code>https://www.yoursite.com</code> with your site's URL and <code>YOUR_JOOMLA_API_TOKEN</code> with the token you generated.</p>
+        
+        <h4>Get All Articles</h4>
+        <pre><code>curl -X POST -H "X-Joomla-Token: YOUR_JOOMLA_API_TOKEN" "https://www.yoursite.com/index.php?task=mcp.get_articles"</code></pre>
+
+        <h4>Create a New Article</h4>
+        <pre><code>curl -X POST -H "X-Joomla-Token: YOUR_JOOMLA_API_TOKEN" -H "Content-Type: application/json" -d '{"title": "New Article from MCP", "articletext": "&lt;p&gt;This is the content.&lt;/p&gt;", "catid": 2, "published": true}' "https://www.yoursite.com/index.php?task=mcp.create_article"</code></pre>
+
+        <h4>Move an Article to Trash (ID: 123)</h4>
+        <pre><code>curl -X POST -H "X-Joomla-Token: YOUR_JOOMLA_API_TOKEN" -H "Content-Type: application/json" -d '{"article_id": 123}' "https://www.yoursite.com/index.php?task=mcp.move_article_to_trash"</code></pre>
+
+        <h4>Update an Article (ID: 124)</h4>
+        <pre><code>curl -X POST -H "X-Joomla-Token: YOUR_JOOMLA_API_TOKEN" -H "Content-Type: application/json" -d '{"article_id": 124, "title": "Updated Title", "articletext": "&lt;p&gt;New updated content.&lt;/p&gt;"}' "https://www.yoursite.com/index.php?task=mcp.update_article"</code></pre>
+        ]]>
+    </description>
+    <files>
+        <filename plugin="mcp">mcp.php</filename>
+        <filename>index.html</filename>
+    </files>
+    <config>
+    </config>
+</extension>
