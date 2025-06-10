@@ -45,31 +45,31 @@
         <fields name="params">
             <fieldset name="content" label="Content">
                 <description>Select which features of the plugin should be active for management by external sources.</description>
-                <field name="enable_get_article" type="radio" default="1" label="Get Article">
+                <field name="enable_get_article" type="radio" default="1" label="Get Article" description="Retrieve a single article by its ID. Requires the article ID to be provided.">
                     <option value="1">Enabled</option>
                     <option value="0">Disabled</option>
                 </field>
-                <field name="enable_get_articles" type="radio" default="1" label="Get Articles">
+                <field name="enable_get_articles" type="radio" default="1" label="Get Articles" description="Retrieve a list of all articles. No additional parameters required.">
                     <option value="1">Enabled</option>
                     <option value="0">Disabled</option>
                 </field>
-                <field name="enable_get_categories" type="radio" default="1" label="Get Categories">
+                <field name="enable_get_categories" type="radio" default="1" label="Get Categories" description="Retrieve a list of all categories. No additional parameters required.">
                     <option value="1">Enabled</option>
                     <option value="0">Disabled</option>
                 </field>
-                <field name="enable_create_article" type="radio" default="1" label="Create Article">
+                <field name="enable_create_article" type="radio" default="1" label="Create Article" description="Create a new article with specified data. Requires title, articletext, and catid.">
                     <option value="1">Enabled</option>
                     <option value="0">Disabled</option>
                 </field>
-                <field name="enable_manage_article_state" type="radio" default="1" label="Manage Article State">
+                <field name="enable_manage_article_state" type="radio" default="1" label="Manage Article State" description="Change the state of an article. Requires the article ID and target state to be provided. Possible states: 1 (published), 0 (unpublished), 2 (archived), -2 (trashed).">
                     <option value="1">Enabled</option>
                     <option value="0">Disabled</option>
                 </field>
-                <field name="enable_move_article_to_trash" type="radio" default="1" label="Move Article to Trash">
+                <field name="enable_move_article_to_trash" type="radio" default="1" label="Move Article to Trash" description="Move an article to the trash. Requires the article ID to be provided.">
                     <option value="1">Enabled</option>
                     <option value="0">Disabled</option>
                 </field>
-                <field name="enable_update_article" type="radio" default="1" label="Update Article">
+                <field name="enable_update_article" type="radio" default="1" label="Update Article" description="Update an existing article with new data. Requires article ID and at least one field to update. Available fields: title, articletext, introtext, fulltext, metadesc, catid.">
                     <option value="1">Enabled</option>
                     <option value="0">Disabled</option>
                 </field>
