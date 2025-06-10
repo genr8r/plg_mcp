@@ -42,5 +42,38 @@
         <filename>index.html</filename>
     </files>
     <config>
+        <fields name="params">
+            <fieldset name="content" label="Content">
+                <description>Select which features of the plugin should be active for management by external sources.</description>
+                <field name="enable_get_article" type="radio" default="1" label="Get Article">
+                    <option value="1">Enabled</option>
+                    <option value="0">Disabled</option>
+                </field>
+                <field name="enable_get_articles" type="radio" default="1" label="Get Articles">
+                    <option value="1">Enabled</option>
+                    <option value="0">Disabled</option>
+                </field>
+                <field name="enable_get_categories" type="radio" default="1" label="Get Categories">
+                    <option value="1">Enabled</option>
+                    <option value="0">Disabled</option>
+                </field>
+                <field name="enable_create_article" type="radio" default="1" label="Create Article">
+                    <option value="1">Enabled</option>
+                    <option value="0">Disabled</option>
+                </field>
+                <field name="enable_manage_article_state" type="radio" default="1" label="Manage Article State">
+                    <option value="1">Enabled</option>
+                    <option value="0">Disabled</option>
+                </field>
+                <field name="enable_move_article_to_trash" type="radio" default="1" label="Move Article to Trash">
+                    <option value="1">Enabled</option>
+                    <option value="0">Disabled</option>
+                </field>
+                <field name="enable_update_article" type="radio" default="1" label="Update Article">
+                    <option value="1">Enabled</option>
+                    <option value="0">Disabled</option>
+                </field>
+            </fieldset>
+        </fields>
     </config>
 </extension>

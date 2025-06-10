@@ -66,6 +66,9 @@ class PlgSystemMcp extends CMSPlugin
         $data = json_decode(file_get_contents('php://input'), true);
 
         switch ($action) {
+            case 'get_article':
+                $this->getArticle($data);
+                break;
             case 'get_articles':
                 $this->getJoomlaArticles();
                 break;
@@ -273,6 +276,40 @@ class PlgSystemMcp extends CMSPlugin
                 $this->sendResponse(['error' => $articleModel->getError()], 500);
             }
             $this->sendResponse(['success' => 'Article updated successfully.']);
+        } catch (Exception $e) {
+            $this->sendResponse(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Retrieves a single Joomla article by ID.
+     *
+     * @param   array  $data  The article data containing the article_id.
+     */
+    private function getArticle($data)
+    {
+        if (!isset($data['article_id'])) {
+            $this->sendResponse(['error' => 'Missing required field: article_id'], 400);
+        }
+
+        $articleId = (int) $data['article_id'];
+
+        $db = Factory::getDbo();
+        $query = $db->getQuery(true)
+            ->select($db->quoteName(['id', 'title', 'alias', 'catid', 'state', 'created', 'introtext', 'fulltext']))
+            ->from($db->quoteName('#__content'))
+            ->where($db->quoteName('id') . ' = ' . $db->quote($articleId));
+
+        $db->setQuery($query);
+
+        try {
+            $article = $db->loadAssoc();
+
+            if (!$article) {
+                $this->sendResponse(['error' => 'Article not found'], 404);
+            }
+
+            $this->sendResponse(['data' => $article]);
         } catch (Exception $e) {
             $this->sendResponse(['error' => $e->getMessage()], 500);
         }
