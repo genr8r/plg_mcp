@@ -94,3 +94,69 @@ curl -X POST \
   -d '{"title": "New Article via MCP", "articletext": "<p>This content was published by an automated workflow!</p>", "catid": 8, "published": true}' \
   "[https://www.yoursite.com/index.php?task=mcp.create_article](https://www.yoursite.com/index.php?task=mcp.create_article)"
 ```
+
+### Setting Up MCP in Claude Desktop
+
+Add the following configuration to your `claude_desktop_config.json` file:
+
+```json
+{
+  "mcpServers": {
+    "Joomla Articles MCP": {
+      "command": "{{PATH_TO_UV}}",
+      "args": [
+        "--directory",
+        "{{PATH_TO_PROJECT}}",
+        "run",
+        "main.py"
+      ],
+      "env": {
+        "JOOMLA_BASE_URL": "<your_joomla_website_url>",
+        "BEARER_TOKEN": "<your_joomla_api_token>"
+      }
+    }
+  }
+}
+```
+
+* Replace `{{PATH_TO_UV}}` with the path to `uv` (you can find it by running `which uv`).
+* Replace `{{PATH_TO_PROJECT}}` with the path to your project directory (use `pwd` in the repository root to get the path).
+* Replace `<your_joomla_website_url>` with your Joomla website's base URL.
+* Replace `<your_joomla_api_token>` with the API token generated in Joomla.
+
+### Setting Up MCP in n8n
+
+1. **Create an HTTP Node:**
+
+   * Add an HTTP Request node to your workflow.
+   * Set the **Method** to `POST`.
+   * Set the **URL** to `https://<your_joomla_website_url>/index.php`.
+   * Add a query parameter: `task=mcp.<your_task>` (e.g., `task=mcp.create_article`).
+
+2. **Add Headers:**
+
+   * Add a header: `X-Joomla-Token` with the value `<your_joomla_api_token>`.
+
+3. **Add JSON Body:**
+
+   * Add the JSON payload for the task you want to perform (e.g., creating or updating an article).
+
+### Setting Up MCP in Make (formerly Integromat)
+
+1. **Create a Scenario:**
+
+   * Add an HTTP module to your scenario.
+   * Set the **Method** to `POST`.
+   * Set the **URL** to `https://<your_joomla_website_url>/index.php`.
+
+2. **Add Query Parameters:**
+
+   * Add a query parameter: `task=mcp.<your_task>` (e.g., `task=mcp.get_article`).
+
+3. **Add Headers:**
+
+   * Add a header: `X-Joomla-Token` with the value `<your_joomla_api_token>`.
+
+4. **Add JSON Body:**
+
+   * Add the JSON payload for the task you want to perform.
