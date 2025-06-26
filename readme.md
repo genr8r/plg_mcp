@@ -2,7 +2,7 @@
 
 ![Joomla](https://img.shields.io/badge/Joomla!-4.x-5091CD?style=for-the-badge&logo=joomla)
 ![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-2.0.0-green?style=for-the-badge)
 
 MCP is a lightweight, powerful system plugin for Joomla that provides a **Model Context Protocol**—a simple, task-based API for managing content. It acts as a streamlined bridge between your Joomla website and the modern world of AI, workflow automation, and internal tooling. Learn more at [Model Context Protocol](https://modelcontextprotocol.io/).
 
@@ -54,19 +54,17 @@ Platforms like [Windmill](https://windmill.dev) allow you to quickly build inter
 
 ## Installation & Setup
 
-1.  **Download:** Download the latest `plg_system_mcp_vX.X.X.zip` file from the [Releases](https://github.com/your-username/joomla-mcp-plugin/releases) page.
+1.  **Download:** Download the latest `plg_system_mcp_vX.X.X.zip` file from the [Releases](https://github.com/genr8r/joomla-mcp-plugin/releases) page.
 2.  **Install:** In your Joomla Administrator panel, go to `System` -> `Install` -> `Extensions` and upload the zip file.
 3.  **Enable Plugin:** Go to `System` -> `Manage` -> `Plugins` and search for "MCP". Enable the plugin.
-4.  **Enable Joomla API Auth:**
-    * Go to `System` -> `Manage` -> `Plugins` and search for `Web Services - Authentication - Token`. Ensure it is enabled.
-5.  **Generate a User API Token:**
+4.  **Generate a User API Token:**
     * Go to `Users` -> `Manage` and select the user you want to grant API access to. This user's permissions will be respected.
     * Click the **"Joomla API Token"** tab.
     * Click **"Create a New Token"** to generate an API key. Copy this key securely.
 
 ## API Usage
 
-> **Note:** See the [Critical Note for Version 2](#a-critical-note-for-version-2) below for important planned changes to the API.
+> **Note:** This is Version 2.0 with consolidated API tasks and improved architecture.
 
 * **Endpoint:** `https://www.yoursite.com/index.php`
 * **Method:** `POST`
@@ -97,36 +95,9 @@ curl -X POST \
   "[https://www.yoursite.com/index.php?task=mcp.create_article](https://www.yoursite.com/index.php?task=mcp.create_article)"
 ```
 
-### Setting Up MCP in Claude Desktop
+### Using MCP with Workflow Automation Tools
 
-Add the following configuration to your `claude_desktop_config.json` file:
-
-```json
-{
-  "mcpServers": {
-    "Joomla Articles MCP": {
-      "command": "{{PATH_TO_UV}}",
-      "args": [
-        "--directory",
-        "{{PATH_TO_PROJECT}}",
-        "run",
-        "main.py"
-      ],
-      "env": {
-        "JOOMLA_BASE_URL": "<your_joomla_website_url>",
-        "BEARER_TOKEN": "<your_joomla_api_token>"
-      }
-    }
-  }
-}
-```
-
-* Replace `{{PATH_TO_UV}}` with the path to `uv` (you can find it by running `which uv`).
-* Replace `{{PATH_TO_PROJECT}}` with the path to your project directory (use `pwd` in the repository root to get the path).
-* Replace `<your_joomla_website_url>` with your Joomla website's base URL.
-* Replace `<your_joomla_api_token>` with the API token generated in Joomla.
-
-### Setting Up MCP in n8n
+#### n8n Integration
 
 1. **Create an HTTP Node:**
 
@@ -143,7 +114,7 @@ Add the following configuration to your `claude_desktop_config.json` file:
 
    * Add the JSON payload for the task you want to perform (e.g., creating or updating an article).
 
-### Setting Up MCP in Make (formerly Integromat)
+#### Make.com Integration
 
 1. **Create a Scenario:**
 
