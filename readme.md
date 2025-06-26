@@ -77,13 +77,13 @@ Platforms like [Windmill](https://windmill.dev) allow you to quickly build inter
 
 | Task                         | Description                                            | Example JSON Body                                                                                             |
 | ---------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `mcp.info`                  | Returns plugin info and authentication status.         | `null`                                                                                                        |
 | `mcp.get_article`           | Retrieves a single article by ID.                      | `{"article_id": 124}`                                                                                         |
-| `mcp.get_articles`           | Retrieves a list of all articles.                      | `null`                                                                                                        |
+| `mcp.get_articles`           | Retrieves a list of all articles.                      | `null` or `{"catid": 8, "state": 1, "limit": 10}`                                                           |
 | `mcp.get_categories`         | Retrieves a list of all content categories.            | `null`                                                                                                        |
+| `mcp.get_tags`              | Retrieves a list of all tags.                          | `null`                                                                                                        |
 | `mcp.create_article`         | Creates a new article.                                 | `{"title": "My Title", "articletext": "<p>Content</p>", "catid": 2, "published": true}`                       |
-| `mcp.update_article`         | Updates an existing article.                           | `{"article_id": 124, "title": "Updated Title", "articletext": "<p>New content.</p>"}`                       |
-| `mcp.manage_article_state`   | Changes an article's state (1=Pub, 0=Unpub, 2=Archive) | `{"article_id": 125, "target_state": 0}`                                                                      |
-| `mcp.move_article_to_trash`  | Moves an article to the trash.                         | `{"article_id": 126}`                                                                                         |
+| `mcp.update_article`         | Updates article content and/or state (consolidated).   | `{"article_id": 124, "title": "Updated Title", "state": 0}` or `{"article_id": 126, "state": -2}`           |
 
 ### Example: Full `curl` Request
 
@@ -163,14 +163,21 @@ Add the following configuration to your `claude_desktop_config.json` file:
 
    * Add the JSON payload for the task you want to perform.
 
-## A Critical Note for Version 2
+## Version 2.0 Changes
 
-I was so eager to get this out that I did not think through the tasks as carefully as I should have. Why does managing the article state or moving it to trash exist as separate tasks from `update_article`?
-
-### Planned Changes for Version 2
+### Implemented Improvements
 
 1. **Task Consolidation:**
-   * The `manage_article_state` and `move_article_to_trash` tasks will be consolidated into the `update_article` task. This will simplify the API and make it more intuitive.
+   * The `manage_article_state` and `move_article_to_trash` tasks have been consolidated into the `update_article` task. You can now update content and state in a single call.
+   * Use `{"article_id": 123, "state": -2}` to move to trash, `{"article_id": 123, "state": 0}` to unpublish, etc.
 
 2. **New Features:**
-   * Additional tasks for managing categories and tags will be introduced, expanding the plugin's capabilities.
+   * Added `mcp.get_tags` task for retrieving all tags
+   * Added `mcp.info` task for plugin information and authentication status
+   * Enhanced filtering and pagination support for `get_articles`
+
+3. **Code Architecture:**
+   * Completely refactored with organized handler classes
+   * Improved authentication system
+   * Better error handling and validation
+   * Streamlined JSON responses with timestamps

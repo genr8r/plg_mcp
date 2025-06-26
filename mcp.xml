@@ -7,72 +7,11 @@
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>connect@intergen.org</authorEmail>
     <authorUrl>https://intergen.org</authorUrl>
-    <version>1.0.1</version>
-    <description>
-        <![CDATA[
-        <p>This plugin provides an MCP (Management Control Program) to manage Joomla articles and categories via a secure API endpoint, using Joomla's built-in API Token for authentication.</p>
-        
-        <h3>Setup Instructions</h3>
-        <ol>
-            <li>Go to <b>System -> Manage -> Plugins</b> and ensure the plugin named "<b>Web Services - Authentication - Token</b>" is enabled.</li>
-            <li>Go to <b>Users -> Manage</b> and select a user who will have API access.</li>
-            <li>In the user's profile, click the "<b>Joomla API Token</b>" tab.</li>
-            <li>Click "<b>Create a New Token</b>" to generate an API key for this user. The user must have permissions to create, edit, or manage the content you wish to interact with.</li>
-            <li>Use this generated token in the <code>X-Joomla-Token</code> header of your requests.</li>
-        </ol>
-
-        <h3>Usage Examples (cURL)</h3>
-        <p>Replace <code>https://www.yoursite.com</code> with your site's URL and <code>YOUR_JOOMLA_API_TOKEN</code> with the token you generated.</p>
-        
-        <h4>Get All Articles</h4>
-        <pre><code>curl -X POST -H "X-Joomla-Token: YOUR_JOOMLA_API_TOKEN" "https://www.yoursite.com/index.php?task=mcp.get_articles"</code></pre>
-
-        <h4>Create a New Article</h4>
-        <pre><code>curl -X POST -H "X-Joomla-Token: YOUR_JOOMLA_API_TOKEN" -H "Content-Type: application/json" -d '{"title": "New Article from MCP", "articletext": "&lt;p&gt;This is the content.&lt;/p&gt;", "catid": 2, "published": true}' "https://www.yoursite.com/index.php?task=mcp.create_article"</code></pre>
-
-        <h4>Move an Article to Trash (ID: 123)</h4>
-        <pre><code>curl -X POST -H "X-Joomla-Token: YOUR_JOOMLA_API_TOKEN" -H "Content-Type: application/json" -d '{"article_id": 123}' "https://www.yoursite.com/index.php?task=mcp.move_article_to_trash"</code></pre>
-
-        <h4>Update an Article (ID: 124)</h4>
-        <pre><code>curl -X POST -H "X-Joomla-Token: YOUR_JOOMLA_API_TOKEN" -H "Content-Type: application/json" -d '{"article_id": 124, "title": "Updated Title", "articletext": "&lt;p&gt;New updated content.&lt;/p&gt;"}' "https://www.yoursite.com/index.php?task=mcp.update_article"</code></pre>
-        ]]>
-    </description>
+    <version>2.0.0</version>
+    <description>MCP - Model Context Protocol for Joomla! v2.0 - AI-optimized content management API</description>
     <files>
         <filename plugin="mcp">mcp.php</filename>
+        <filename>readme.md</filename>
+        <folder>src</folder>
     </files>
-    <config>
-        <fields name="params">
-            <fieldset name="content" label="Content">
-                <description>Select which features of the plugin should be active for management by external sources.</description>
-                <field name="enable_get_article" type="radio" default="1" label="Get Article" description="Retrieve a single article by its ID. Requires the article ID to be provided.">
-                    <option value="1">Enabled</option>
-                    <option value="0">Disabled</option>
-                </field>
-                <field name="enable_get_articles" type="radio" default="1" label="Get Articles" description="Retrieve a list of all articles. No additional parameters required.">
-                    <option value="1">Enabled</option>
-                    <option value="0">Disabled</option>
-                </field>
-                <field name="enable_get_categories" type="radio" default="1" label="Get Categories" description="Retrieve a list of all categories. No additional parameters required.">
-                    <option value="1">Enabled</option>
-                    <option value="0">Disabled</option>
-                </field>
-                <field name="enable_create_article" type="radio" default="1" label="Create Article" description="Create a new article with specified data. Requires title, articletext, and catid.">
-                    <option value="1">Enabled</option>
-                    <option value="0">Disabled</option>
-                </field>
-                <field name="enable_manage_article_state" type="radio" default="1" label="Manage Article State" description="Change the state of an article. Requires the article ID and target state to be provided. Possible states: 1 (published), 0 (unpublished), 2 (archived), -2 (trashed).">
-                    <option value="1">Enabled</option>
-                    <option value="0">Disabled</option>
-                </field>
-                <field name="enable_move_article_to_trash" type="radio" default="1" label="Move Article to Trash" description="Move an article to the trash. Requires the article ID to be provided.">
-                    <option value="1">Enabled</option>
-                    <option value="0">Disabled</option>
-                </field>
-                <field name="enable_update_article" type="radio" default="1" label="Update Article" description="Update an existing article with new data. Requires article ID and at least one field to update. Available fields: title, articletext, introtext, fulltext, metadesc, catid.">
-                    <option value="1">Enabled</option>
-                    <option value="0">Disabled</option>
-                </field>
-            </fieldset>
-        </fields>
-    </config>
 </extension>
